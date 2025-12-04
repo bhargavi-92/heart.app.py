@@ -1,0 +1,22 @@
+# Ignore common operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Ignore Python environment and package files
+__pycache__/
+.venv/
+*.pyc
+*.ipynb_checkpoints/
+
+# CRITICAL: Ignore System/Hidden/Local files that caused the error
+/AppData/
+/Library/
+/tmp/
+
+# Ignore log, data, and model files
+*.log
+*.db
+*.jtx
+*.pkl
+*.joblib
