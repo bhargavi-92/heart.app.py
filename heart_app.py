@@ -40,5 +40,8 @@ if st.button("Predict"):
 
     if prediction == 1:
         st.error("⚠️ High Risk of Heart Failure — Consult a Cardiologist Soon!")
+
+    # Final comment for deployment activation
     else:
         st.success("💚 Low Risk of Heart Failure — Stay Healthy!")
+
