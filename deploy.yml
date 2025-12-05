@@ -18,7 +18,7 @@ jobs:
       - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }} # Uses the secret you just created
-          HF_USERNAME: vedanthibhargavi # <<-- REPLACE THIS
+          HF_USERNAME: athidhi.veda # <<-- REPLACE THIS
           SPACE_NAME: heart_app          # <<-- REPLACE THIS
         run: |
           echo "Starting sync to Hugging Face Space: ${{ env.SPACE_NAME }}"
