@@ -33,3 +33,4 @@ jobs:
           # The --force flag ensures it overwrites the default template files
           git push hf-space main --force
           echo "Successfully pushed to Hugging Face Hub."
+      - run: echo "Workflow check complete." # <-- This final line is to force activation
