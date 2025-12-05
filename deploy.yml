@@ -17,15 +17,20 @@ jobs:
       # Step 2: Push the repository to the Hugging Face Space
       - name: Push to Hugging Face Space
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }} # Uses the secret you just created
-          HF_USERNAME: vedanthibhargavi # <<-- REPLACE THIS
-          SPACE_NAME: predict_heart          # <<-- REPLACE THIS
+          # IMPORTANT: This HF_TOKEN must be set as a Secret in your GitHub repository Settings -> Secrets -> Actions
+          HF_TOKEN: ${{ secrets.HF_TOKEN }} 
+          # Confirmed correct Hugging Face username
+          HF_USERNAME: athidhiveda 
+          # Confirmed correct Space name
+          SPACE_NAME: heart_app
         run: |
           echo "Starting sync to Hugging Face Space: ${{ env.SPACE_NAME }}"
           
-          # 1. Add the Hugging Face Space as a new git remote using the token for auth
+          # 1. Add the Hugging Face Space as a new git remote using the token for authentication
           git remote add hf-space https://${{ env.HF_USERNAME }}:${{ env.HF_TOKEN }}@huggingface.co/spaces/${{ env.HF_USERNAME }}/${{ env.SPACE_NAME }}
           
           # 2. Push all content (code, models, requirements) to the Space
+          # The --force flag ensures it overwrites the default template files
           git push hf-space main --force
           echo "Successfully pushed to Hugging Face Hub."
+      - run: echo "Workflow check complete." # <-- This final line is to force activation
