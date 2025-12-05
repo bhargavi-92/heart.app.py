@@ -1,0 +1,36 @@
+name: Sync to Hugging Face Hub
+
+on:
+  push:
+    branches: [main] # Triggers the workflow on every push to the 'main' branch
+
+jobs:
+  sync-to-hub:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out the GitHub repository code
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true 
+
+      # Step 2: Push the repository to the Hugging Face Space
+      - name: Push to Hugging Face Space
+        env:
+          # IMPORTANT: This HF_TOKEN must be set as a Secret in your GitHub repository Settings -> Secrets -> Actions
+          HF_TOKEN: ${{ secrets.HF_TOKEN }} 
+          # Confirmed correct Hugging Face username
+          HF_USERNAME: athidhiveda 
+          # Confirmed correct Space name
+          SPACE_NAME: heart_app
+        run: |
+          echo "Starting sync to Hugging Face Space: ${{ env.SPACE_NAME }}"
+          
+          # 1. Add the Hugging Face Space as a new git remote using the token for authentication
+          git remote add hf-space https://${{ env.HF_USERNAME }}:${{ env.HF_TOKEN }}@huggingface.co/spaces/${{ env.HF_USERNAME }}/${{ env.SPACE_NAME }}
+          
+          # 2. Push all content (code, models, requirements) to the Space
+          # The --force flag ensures it overwrites the default template files
+          git push hf-space main --force
+          echo "Successfully pushed to Hugging Face Hub."
+      - run: echo "Workflow check complete." # <-- This final line is to force activation
