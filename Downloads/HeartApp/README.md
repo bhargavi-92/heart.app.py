@@ -1,5 +1,5 @@
 ---
 title: Heart Disease Predictor
 sdk: streamlit
-app_file: src/app.py 
+app_file: heart_app.py 
 ---
